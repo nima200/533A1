@@ -26,7 +26,7 @@ public aspect LoggingService {
 	}
 
 	before(Account account, int amount) : WithdrawMade(account, amount) {
-		String stringToLog = "withdraw called on object" + this + " with parameter " + amount;
+		String stringToLog = "withdraw called on object" + account + " with parameter " + amount;
 		Logger.log(stringToLog);
 	}
 
