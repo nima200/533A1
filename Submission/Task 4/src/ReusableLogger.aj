@@ -10,17 +10,21 @@ public abstract aspect ReusableLogger {
 
 	after() returning(Object o): constructor() {
 		String stringToLog = "Created object " + o;
-		Logger.log(stringToLog);
+		showLog(stringToLog);
 	}
 
 	before(Object target) : operation(target) {
 		Object[] params = thisJoinPoint.getArgs();
 		String paramsStr = stripArrayBrackets(Arrays.toString(params));
 		String stringToLog = thisJoinPointStaticPart.getSignature().getName() + " called on object " + target + " with parameter " + paramsStr;
-		Logger.log(stringToLog);
+		showLog(stringToLog);
 	}
 
 	private String stripArrayBrackets(String pArrayStr) {
 		return pArrayStr.substring(1, pArrayStr.length() - 1);
+	}
+
+	private void showLog(String stringToLog) {
+		System.out.println(stringToLog);
 	}
 }

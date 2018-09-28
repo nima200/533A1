@@ -16,21 +16,25 @@ public aspect LoggingService {
 
 	after() returning(Account account) : AccountCreation() {
 		String stringToLog = "Created object " + account;
-		Logger.log(stringToLog);
+		showLog(stringToLog);
 	}
 
 	before(Account account, int amount) : DepositMade(account, amount) {
 		String stringToLog = "deposit called on object " + account + " with parameter " + amount;
-		Logger.log(stringToLog);
+		showLog(stringToLog);
 	}
 
 	before(Account account, int amount) : WithdrawMade(account, amount) {
 		String stringToLog = "withdraw called on object" + account + " with parameter " + amount;
-		Logger.log(stringToLog);
+		showLog(stringToLog);
 	}
 
 	after() returning(Customer customer) : CustomerCreation() {
 		String stringToLog = "Created object " + customer;
-		Logger.log(stringToLog);
+		showLog(stringToLog);
+	}
+
+	private void showLog(String stringToLog) {
+		System.out.println(stringToLog);
 	}
 }
